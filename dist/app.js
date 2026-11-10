@@ -20,6 +20,11 @@ const beforeCards = [
   {id:'before-benefits',title:'Исходные преимущества',headline:'Срок службы и экономичность',done:'На слайде заявлены 15 лет службы, 50 000 световых часов и экономичность.',why:'Такие цифры оставлять только при наличии обоснования. В первую очередь показываем понятные и подтверждённые свойства конкретной модели.',note:'Оригинал 7500476470.webp. 15 лет и 50 000 часов — заявления на старой инфографике, а не результаты нашей проверки.'},
   {id:'before-technology',title:'Исходные технологии',headline:'Ещё один срок гарантии',done:'На слайде о светодиодах и энергопотреблении есть значок «Гарантия 5 лет». На обложке при этом указаны 2 года.',why:'Новое наблюдение по предоставленным исходникам: нужно выяснить, к чему относится значок, и устранить неоднозначность вместе с расхождением 25 месяцев из аудита.',note:'Оригинал 8084665844.webp. Срок 5 лет нельзя считать подтверждённой гарантией на весь светильник без документов.'}
 ];
+const researchCards = [
+  {src:'assets/research/lucimo-cover.jpg', title:'LUCIMO · 1347165797', headline:'Исходная обложка LUCIMO', done:'Крупная люстра и пульт, параметры и четыре сценария. В верхней строке одновременно указаны 40/50 см и 72/120 Вт.', why:'Для iLumen оставляем на обложке данные выбранной модели. Сравнение всей линейки переносим на отдельный слайд.', note:'Изображение с Ozon, получено 10.11.2026. Источник и ссылка на товар находятся в разделе «Конкуренты». Это материал конкурента, не макет iLumen.'},
+  {src:'assets/research/smartbuy-cover.jpg', title:'Smartbuy · 1827059716', headline:'Исходная обложка Smartbuy MEZZO', done:'На изображении заявлены 50 см, 9600 лм, 40 м² и 120 Вт. В доступном поле той же карточки указано 25 м².', why:'Слайды и поля должны опираться на один проверенный набор данных. Для iLumen подтверждаем световой поток и условия оценки площади, а не копируем числа конкурента.', note:'Изображение с Ozon Беларусь, получено 10.11.2026. Несовпадение относится к доступным материалам; версии страницы могли изменяться.'},
+  {src:'assets/research/rivoli-cover.jpg', title:'Rivoli · 2969492035', headline:'Исходная обложка Rivoli 80 Вт', done:'Светильник показан в светлом интерьере. На обложке два коротких аргумента: площадь и пульт. Диаметр не указан.', why:'Для iLumen это референс интерьерной подачи. Добавляем понятный размер и проверяем вариант в тесте. 80 Вт у Rivoli не считаем эквивалентом 120 Вт у iLumen.', note:'Изображение с Ozon, получено 10.11.2026. Это новая найденная модель 80 Вт, а не неустановленная Rivoli 120 Вт из прежнего аудита.'}
+];
 const beforeForTopic = [0,2,null,9];
 const topics = [
   {label:'Обложка карточки',card:0,title:'От категории — к пользе',before:'Огромная надпись «ЛЮСТРА СВЕТОДИОДНАЯ» забирает внимание. Часть данных попадает под элементы Ozon.',after:'Крупный товар, спокойный фон и три аргумента рядом: размер, яркость, пульт.',why:'Обложка помогает быстро понять предложение. Остальные подробности раскрываются следующими слайдами, не конкурируя друг с другом.',next:'Подготовить предметную и интерьерную обложки. Проверить обе в маленьком размере и с интерфейсом площадки.',mockTitle:'ЛЮСТРА СВЕТОДИОДНАЯ',mock:['Общее название — главный акцент','Важные надписи близко к краям']},
@@ -148,15 +153,15 @@ const viewer=$('#viewer');let viewerTrigger=null,viewerItems=cards;
 function renderViewer(){
   $('.viewer-body').scrollTop=0;
   const card=viewerItems[viewerCard];$('#viewer-title').textContent=card.title;$('#viewer-counter').textContent=`${viewerCard+1} / ${viewerItems.length}`;
-  const img=$('#viewer-image');img.src=`assets/${card.id}.webp`;img.alt=card.headline;
+  const img=$('#viewer-image');img.src=card.src||`assets/${card.id}.webp`;img.alt=card.headline;
   $('#viewer-description').textContent=card.done;$('#viewer-why').textContent=card.why;$('#viewer-note').textContent=card.note;
-  $('#viewer-section').textContent=viewerItems===beforeCards?'Что было на слайде':'Что сделано';
-  $('#viewer-bottom-label').textContent=viewerItems===beforeCards?'Исходные материалы · 10 слайдов':'Новая галерея · рекомендуемый порядок';
+  $('#viewer-section').textContent=viewerItems===researchCards?'Что видно у конкурента':viewerItems===beforeCards?'Что было на слайде':'Что сделано';
+  $('#viewer-bottom-label').textContent=viewerItems===researchCards?'Конкуренты · исходные обложки':viewerItems===beforeCards?'Исходные материалы · 10 слайдов':'Новая галерея · рекомендуемый порядок';
   $('#viewer-prev').disabled=viewerCard===0;$('#viewer-next').disabled=viewerCard===viewerItems.length-1;
   $('#viewer-mobile-prev').disabled=viewerCard===0;$('#viewer-mobile-next').disabled=viewerCard===viewerItems.length-1;
 }
 function openViewer(index,kind='after'){
-  viewerTrigger=document.activeElement;viewerItems=kind==='before'?beforeCards:cards;viewerCard=index;renderViewer();$('.viewer-body').scrollTop=0;
+  viewerTrigger=document.activeElement;viewerItems=kind==='research'?researchCards:kind==='before'?beforeCards:cards;viewerCard=index;renderViewer();$('.viewer-body').scrollTop=0;
   if(!viewer.open)viewer.showModal();document.body.style.overflow='hidden';$('#viewer-close').focus();
 }
 async function closeViewer(){
@@ -178,6 +183,7 @@ viewer.addEventListener('click',event=>{if(event.target===viewer){const r=viewer
 $$('[data-present]').forEach(button=>button.addEventListener('click',()=>openViewer(0)));
 $$('[data-open-card]').forEach(button=>button.addEventListener('click',()=>openViewer(Number(button.dataset.openCard))));
 $$('[data-open-before]').forEach(button=>button.addEventListener('click',()=>openViewer(Number(button.dataset.openBefore),'before')));
+$$('[data-open-research]').forEach(button=>button.addEventListener('click',()=>openViewer(Number(button.dataset.openResearch),'research')));
 $('#viewer-fullscreen').addEventListener('click',async()=>{
   try{if(document.fullscreenElement)await document.exitFullscreen();else await viewer.requestFullscreen();}catch{$('#viewer-fullscreen').textContent='Используйте полноэкранный режим браузера';}
 });

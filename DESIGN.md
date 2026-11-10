@@ -155,3 +155,5 @@ All interactive controls use a 3px cobalt focus outline with 5px offset. State c
 
 The expanded audit reuses these tokens for a ten-item horizontal original-artwork rail, model-name tabs, a scrollable competitor table and a responsive funnel. Historical market figures are dated, and product claims remain subject to verification.
 
+The November 10 research extension adds three keyboard-operable competitor tabs, each pairing an attributed original cover with observations and an iLumen recommendation. All panels are visible without JavaScript; enhancement reveals tabs and hides inactive panels. The existing viewer has a separate three-cover research mode. Priority filters expose six audit items, and native disclosures group buyer questions. Mobile stacks images and explanations without dropping source notes. The header and hero link directly to competitors and the expanded audit. Source links are underlined or visibly action-shaped, and cached prices carry explicit freshness and comparison limits. The historical table is now an archive disclosure, distinct from the new research.
+

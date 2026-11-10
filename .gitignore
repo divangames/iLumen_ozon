@@ -1,0 +1,7 @@
+.DS_Store
+__pycache__/
+.qa/
+.openai/
+.impeccable/
+*.zip
+*.log

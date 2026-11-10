@@ -13,3 +13,7 @@
 .competitor-tabs button{transition:transform 160ms cubic-bezier(.23,1,.32,1)}
 .competitor-art figcaption{font-size:13px}
 @media(max-width:600px){.competitor-tabs button span{font-size:12px}.competitor-tabs button{border-radius:var(--radius)}.competitor-art figcaption{font-size:13px}}
+
+.price-insight{margin-top:28px;padding:28px 32px;background:#e9eef9;border-radius:var(--radius)}.price-insight h4{font-size:24px;line-height:1.2;margin-bottom:16px;letter-spacing:-.02em}.price-insight p{max-width:75ch}.test-image.interior-cover img{object-fit:contain}.scene-crop{aspect-ratio:483/430}.scene-crop img{width:224.845%;left:-11.18%;top:-73.95%}.scene-crop[data-scene="1"] img{left:-113.25%}.scene-crop[data-scene="2"] img{left:-11.18%;top:-176.74%}.scene-crop[data-scene="3"] img{left:-113.25%;top:-176.74%}@media(max-width:600px){.price-insight{padding:24px}.price-insight h4{font-size:21px}}
+@media(min-width:901px){.gallery-rail{grid-template-columns:repeat(9,minmax(0,1fr));gap:12px}.thumb span{font-size:13px}.thumb b{display:block}}
+.hero-product{height:auto;aspect-ratio:1086/422}.hero-product img{position:absolute;left:0;top:-104.265%;width:100%;height:auto;object-fit:initial}
